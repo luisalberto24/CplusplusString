@@ -1,8 +1,6 @@
 #pragma once
-#include <iostream>
 
 typedef unsigned int uint;
-using namespace std;
 
 template<typename T>
 class base_string
