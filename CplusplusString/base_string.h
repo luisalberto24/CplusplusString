@@ -19,6 +19,10 @@ public:
     {
         load_data(value);
     }
+    ~base_string()
+    {
+        this->free();
+    }
 public:
     static int get_length(const T* value)
     {
