@@ -19,6 +19,7 @@ public:
     {
         load_data(value);
     }
+
     ~base_string()
     {
         this->free();
