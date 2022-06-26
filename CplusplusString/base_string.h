@@ -64,7 +64,7 @@ public:
         {
             delete this->data;
         }
-        this->length = 0;
+        this->initialize();
     }
 
     uint get_length()
