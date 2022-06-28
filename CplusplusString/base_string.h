@@ -5,105 +5,104 @@ typedef unsigned int uint;
 template<typename T>
 class base_string
 {
+    private:
 
-private:
+        T* data;
+        uint length;
 
-    T* data;
-    uint length;
+    public:
 
-public:
-
-    base_string()
-    {
-        this->initialize();
-    }
-
-    base_string(const T* value)
-    {
-        load_data(value);
-    }
-
-    ~base_string()
-    {
-        this->free();
-    }
-
-private:
-
-    void load_data(const T* value)
-    {
-        load_data(value, base_string::get_length(value));
-    }
-
-    void load_data(const T* value, uint length)
-    {
-        this->initialize();
-        if (length > 0)
+        base_string()
         {
-            this->length = length;
-            this->data = new T[length + 1];
-            this->data[length] = 0;
-            for (uint i = 0; value[i]; i++)
+            this->initialize();
+        }
+
+        base_string(const T* value)
+        {
+            load_data(value);
+        }
+
+        ~base_string()
+        {
+            this->free();
+        }
+
+    private:
+
+        void load_data(const T* value)
+        {
+            load_data(value, base_string::get_length(value));
+        }
+
+        void load_data(const T* value, uint length)
+        {
+            this->initialize();
+            if (length > 0)
             {
-                this->data[i] = value[i];
+                this->length = length;
+                this->data = new T[length + 1];
+                this->data[length] = 0;
+                for (uint i = 0; value[i]; i++)
+                {
+                    this->data[i] = value[i];
+                }
             }
         }
-    }
 
-    void initialize()
-    {
-        this->data = 0;
-        this->length = 0;
-    }
-
-    void free()
-    {
-        if (length > 0)
+        void initialize()
         {
-            delete this->data;
-        }
-        this->data = 0;
-        this->length = 0;
-    }
-
-public:
-
-    static uint get_length(const T* value)
-    {
-        if (value)
-        {
-            uint i = 0;
-            while (value[i]) i++;
-            return i;
+            this->data = 0;
+            this->length = 0;
         }
 
-        return 0;
-    }
+        void free()
+        {
+            if (length > 0)
+            {
+                delete this->data;
+            }
+            this->data = 0;
+            this->length = 0;
+        }
 
-    uint get_length()
-    {
-        return this->length;
-    }
+    public:
 
-    T* const get_value()
-    {
-        return this->data;
-    }
+        static uint get_length(const T* value)
+        {
+            if (value)
+            {
+                uint i = 0;
+                while (value[i]) i++;
+                return i;
+            }
 
-public:
+            return 0;
+        }
 
-    base_string& operator = (const T* value)
-    {
-        this->free();
-        this->load_data(value);
+        uint get_length()
+        {
+            return this->length;
+        }
 
-        return *this;
-    }
+        T* const get_value()
+        {
+            return this->data;
+        }
 
-    operator T* const()
-    {
-        return this->data;
-    }
+    public:
+
+        base_string& operator = (const T* value)
+        {
+            this->free();
+            this->load_data(value);
+
+            return *this;
+        }
+
+        operator T* const()
+        {
+            return this->data;
+        }
 };
 
 typedef wchar_t* wchar_t_ptr;
