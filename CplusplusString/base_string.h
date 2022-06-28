@@ -5,9 +5,12 @@ typedef unsigned int uint;
 template<typename T>
 class base_string
 {
+
 private:
+
     T* data;
     uint length;
+
 public:
 
     base_string()
@@ -24,18 +27,8 @@ public:
     {
         this->free();
     }
-public:
-    static int get_length(const T* value)
-    {
-        if (value)
-        {
-            uint i = 0;
-            while (value[i]) i++;
-            return i;
-        }
 
-        return 0;
-    }
+private:
 
     void load_data(const T* value)
     {
@@ -69,7 +62,22 @@ public:
         {
             delete this->data;
         }
-        this->initialize();
+        this->data = 0;
+        this->length = 0;
+    }
+
+public:
+
+    static uint get_length(const T* value)
+    {
+        if (value)
+        {
+            uint i = 0;
+            while (value[i]) i++;
+            return i;
+        }
+
+        return 0;
     }
 
     uint get_length()
@@ -83,6 +91,7 @@ public:
     }
 
 public:
+
     base_string& operator = (const T* value)
     {
         this->free();
