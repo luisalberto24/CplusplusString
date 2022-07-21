@@ -103,7 +103,7 @@ class base_string
             return *this;
         }
 
-        char operator [](int i)
+        T operator [](int i)
         {
             return (i > -1 && i < (int)length) ? this->data[i] : '\x0';
         }
