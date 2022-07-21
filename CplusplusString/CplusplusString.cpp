@@ -14,8 +14,13 @@ int main()
     wcout << "length: " << pwtext->get_length() << endl;
     DELETE_WSTRING_POINTER(pwtext);
     
-    wtext = L"New wide chart text.";
-    ctext = "New character chart text.";
+    wtext = L"New wide char text.";
+    ctext = "New character char text.";
+
+    for(uint x = 0; x < ctext.get_length(); x++)
+    { 
+        printf("%c\n", ctext[x]);
+    }
 
     wcout << (wchar_t_ptr)wtext << endl;
     wcout << "length: " << wtext.get_length() << endl;

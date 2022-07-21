@@ -14,7 +14,7 @@ class base_string
 
         base_string()
         {
-            this->initialize();
+            this->init();
         }
 
         base_string(const T* value)
@@ -36,20 +36,25 @@ class base_string
 
         void load_data(const T* value, uint length)
         {
-            this->initialize();
+            this->init();
+            this->new_base_string(value, length);            
+        }
+
+        void new_base_string(const T* value, uint length)
+        {
             if (length > 0)
             {
                 this->length = length;
                 this->data = new T[length + 1];
                 this->data[length] = 0;
-                for (uint i = 0; value[i]; i++)
+                for (uint i = 0; i < length; i++)
                 {
                     this->data[i] = value[i];
                 }
             }
         }
 
-        void initialize()
+        void init()
         {
             this->data = 0;
             this->length = 0;
@@ -61,8 +66,7 @@ class base_string
             {
                 delete this->data;
             }
-            this->data = 0;
-            this->length = 0;
+            this->init();
         }
 
     public:
@@ -97,6 +101,11 @@ class base_string
             this->load_data(value);
 
             return *this;
+        }
+
+        char operator [](int i)
+        {
+            return (i > -1 && i < (int)length) ? this->data[i] : '\x0';
         }
 
         operator T* const()
